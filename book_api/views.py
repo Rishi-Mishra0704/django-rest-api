@@ -6,7 +6,7 @@ from .models import Book
 
 def book_list(request):
     books = Book.objects.all()
-    display_books = list(books.values)
+    display_books = list(books.values())
     return JsonResponse({
         "books": display_books
     })

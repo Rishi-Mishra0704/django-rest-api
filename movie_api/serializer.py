@@ -10,8 +10,6 @@ class ActorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'age']
 
 
-
-
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie

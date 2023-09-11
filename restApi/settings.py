@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'movie_api',
     'book_api',
     'rest_framework',
     'django.contrib.admin',

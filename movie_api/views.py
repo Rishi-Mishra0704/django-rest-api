@@ -25,6 +25,27 @@ def actor_create(request):
         return Response(serializer.errors)
     
 
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def actor(request, pk):
+    if request.method == 'GET':
+        actor = Actor.objects.get(pk=pk)
+        serializer = ActorSerializer(actor)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        actor = Actor.objects.get(pk=pk)
+        serializer = ActorSerializer(actor, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        actor = Actor.objects.get(pk=pk)
+        actor.delete()
+        return Response({'message': 'Actor deleted successfully!'})
+    else:
+        return Response(serializer.errors)
+    
+
 # movie views
 @api_view(['GET'])
 def movie_list(request):
@@ -39,5 +60,25 @@ def movie_create(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+    
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def movie(request, pk):
+    if request.method == 'GET':
+        movie = Movie.objects.get(pk=pk)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        movie = Movie.objects.get(pk=pk)
+        serializer = MovieSerializer(movie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        movie = Movie.objects.get(pk=pk)
+        movie.delete()
+        return Response({'message': 'Movie deleted successfully!'})
     else:
         return Response(serializer.errors)
